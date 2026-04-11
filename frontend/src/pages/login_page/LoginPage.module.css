@@ -1,0 +1,142 @@
+.loginPage {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.loginCard {
+  background: #1a1a2e;
+  border-radius: 30px;
+  padding: 3rem;
+  max-width: 450px;
+  width: 100%;
+  border: 1px solid #ffffff10;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.loginHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.logo span {
+  color: #f97316;
+}
+
+.loginHeader h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.loginHeader p {
+  color: #a0a0b0;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.inputGroup label {
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.inputGroup input {
+  background: #0a0c15;
+  border: 1px solid #ffffff20;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+.inputGroup input:focus {
+  outline: none;
+  border-color: #f97316;
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+}
+
+.inputGroup input::placeholder {
+  color: #a0a0b0;
+}
+
+.options {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+  color: #a0a0b0;
+}
+
+.checkbox input {
+  cursor: pointer;
+}
+
+.forgotPassword {
+  color: #f97316;
+  text-decoration: none;
+  font-size: 0.9rem;
+  transition: 0.3s;
+}
+
+.forgotPassword:hover {
+  text-decoration: underline;
+}
+
+.registerLink {
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #ffffff10;
+  color: #a0a0b0;
+}
+
+.registerLink a {
+  color: #f97316;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.registerLink a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .loginCard {
+    padding: 2rem;
+  }
+  
+  .loginHeader h2 {
+    font-size: 1.5rem;
+  }
+  
+  .options {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+}

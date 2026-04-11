@@ -1,0 +1,144 @@
+.registerPage {
+  min-height: 80vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.registerCard {
+  background: #1a1a2e;
+  border-radius: 30px;
+  padding: 3rem;
+  max-width: 650px;
+  width: 100%;
+  border: 1px solid #ffffff10;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.registerHeader {
+  text-align: center;
+  margin-bottom: 2rem;
+}
+
+.logo {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 1.5rem;
+}
+
+.logo span {
+  color: #f97316;
+}
+
+.registerHeader h2 {
+  font-size: 1.8rem;
+  margin-bottom: 0.5rem;
+}
+
+.registerHeader p {
+  color: #a0a0b0;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+}
+
+.inputGroup label {
+  font-weight: 500;
+  color: #ffffff;
+}
+
+.inputGroup input {
+  background: #0a0c15;
+  border: 1px solid #ffffff20;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 1rem;
+  transition: 0.3s;
+}
+
+.inputGroup input:focus {
+  outline: none;
+  border-color: #f97316;
+  box-shadow: 0 0 0 3px rgba(249, 115, 22, 0.1);
+}
+
+.inputGroup input::placeholder {
+  color: #a0a0b0;
+}
+
+.checkbox {
+  display: flex;
+  align-items: center;
+  gap: 0.8rem;
+  cursor: pointer;
+  color: #a0a0b0;
+  font-size: 0.9rem;
+}
+
+.checkbox input {
+  cursor: pointer;
+  width: 18px;
+  height: 18px;
+}
+
+.checkbox a {
+  color: #f97316;
+  text-decoration: none;
+}
+
+.checkbox a:hover {
+  text-decoration: underline;
+}
+
+.loginLink {
+  text-align: center;
+  margin-top: 2rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid #ffffff10;
+  color: #a0a0b0;
+}
+
+.loginLink a {
+  color: #f97316;
+  text-decoration: none;
+  font-weight: 600;
+}
+
+.loginLink a:hover {
+  text-decoration: underline;
+}
+
+@media (max-width: 768px) {
+  .registerCard {
+    padding: 2rem;
+  }
+  
+  .registerHeader h2 {
+    font-size: 1.5rem;
+  }
+  
+  .formRow {
+    grid-template-columns: 1fr;
+  }
+  
+  .checkbox {
+    align-items: flex-start;
+  }
+}
