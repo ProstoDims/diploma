@@ -1,0 +1,228 @@
+.employeesPage {
+  padding: 1rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.employeesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+  gap: 1.5rem;
+}
+
+.employeeCard {
+  background: #1a1a2e;
+  border-radius: 20px;
+  padding: 1.5rem;
+  border: 1px solid #ffffff10;
+  transition: 0.3s;
+}
+
+.employeeCard:hover {
+  transform: translateY(-5px);
+  border-color: #f9731630;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.avatar {
+  font-size: 3rem;
+}
+
+.deleteBtn {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: 0.3s;
+}
+
+.deleteBtn:hover {
+  opacity: 1;
+}
+
+.employeeCard h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.3rem;
+}
+
+.position {
+  display: inline-block;
+  background: #f9731620;
+  color: #f97316;
+  padding: 0.2rem 0.8rem;
+  border-radius: 20px;
+  font-size: 0.8rem;
+  margin-bottom: 1rem;
+}
+
+.contactInfo {
+  margin-bottom: 1rem;
+  padding-bottom: 1rem;
+  border-bottom: 1px solid #ffffff10;
+}
+
+.contactInfo p {
+  color: #a0a0b0;
+  margin-bottom: 0.3rem;
+  font-size: 0.9rem;
+}
+
+.assignmentsSection {
+  margin-top: 0.5rem;
+}
+
+.assignmentsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+}
+
+.assignBtn {
+  background: #0a0c15;
+  border: 1px solid #f97316;
+  padding: 0.3rem 0.8rem;
+  border-radius: 8px;
+  color: #f97316;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: 0.3s;
+}
+
+.assignBtn:hover {
+  background: #f97316;
+  color: #ffffff;
+}
+
+.assignmentsList {
+  max-height: 150px;
+  overflow-y: auto;
+}
+
+.assignmentItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background: #0a0c15;
+  border-radius: 10px;
+  margin-bottom: 0.5rem;
+  font-size: 0.9rem;
+}
+
+.removeAssignBtn {
+  background: transparent;
+  border: none;
+  color: #ff4444;
+  cursor: pointer;
+  opacity: 0.7;
+}
+
+.removeAssignBtn:hover {
+  opacity: 1;
+}
+
+.emptyAssignments {
+  text-align: center;
+  color: #a0a0b0;
+  padding: 0.5rem;
+  font-size: 0.8rem;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: #1a1a2e;
+  border-radius: 20px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 500px;
+}
+
+.modalContent h2 {
+  margin-bottom: 1rem;
+}
+
+.modalContent h3 {
+  margin: 1rem 0 0.5rem;
+  font-size: 1rem;
+  color: #f97316;
+}
+
+.modalContent input,
+.modalContent select {
+  width: 100%;
+  background: #0a0c15;
+  border: 1px solid #ffffff20;
+  padding: 0.8rem;
+  border-radius: 12px;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.locationsList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.5rem;
+  margin-bottom: 1rem;
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.locationBtn {
+  background: #0a0c15;
+  border: 1px solid #ffffff20;
+  padding: 0.8rem;
+  border-radius: 12px;
+  color: #ffffff;
+  cursor: pointer;
+  text-align: left;
+  transition: 0.3s;
+}
+
+.locationBtn:hover {
+  border-color: #f97316;
+  background: #f9731610;
+}
+
+.modalButtons {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 1rem;
+}
+
+.modalButtons button {
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #0a0c15;
+  border: 1px solid #ffffff20;
+  color: #ffffff;
+}

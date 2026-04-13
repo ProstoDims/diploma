@@ -1,0 +1,120 @@
+.warehousePage {
+  padding: 1rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.warehousesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+}
+
+.warehouseCard {
+  background: #1a1a2e;
+  border-radius: 20px;
+  padding: 1.5rem;
+  border: 1px solid #ffffff10;
+  transition: 0.3s;
+}
+
+.warehouseCard:hover {
+  transform: translateY(-5px);
+  border-color: #f9731630;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.icon {
+  font-size: 2.5rem;
+}
+
+.deleteBtn {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: 0.3s;
+}
+
+.deleteBtn:hover {
+  opacity: 1;
+}
+
+.warehouseCard h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: #f97316;
+}
+
+.warehouseCard p {
+  color: #a0a0b0;
+  margin-bottom: 0.5rem;
+}
+
+.stats {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ffffff10;
+  color: #ffffff;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: #1a1a2e;
+  border-radius: 20px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 500px;
+}
+
+.modalContent h2 {
+  margin-bottom: 1rem;
+}
+
+.modalContent input {
+  width: 100%;
+  background: #0a0c15;
+  border: 1px solid #ffffff20;
+  padding: 0.8rem;
+  border-radius: 12px;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.modalButtons {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.modalButtons button {
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+}

@@ -8,8 +8,12 @@ const LoginPage = () => {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Здесь будет логика авторизации
-    console.log("Login:", { email, password, rememberMe });
+    localStorage.setItem("isAuthenticated", "true");
+    localStorage.setItem(
+      "user",
+      JSON.stringify({ name: "Иван Иванов", email }),
+    );
+    window.location.href = "/dashboard";
   };
 
   return (

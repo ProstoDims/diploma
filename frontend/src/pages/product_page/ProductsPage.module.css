@@ -1,0 +1,158 @@
+.productsPage {
+  padding: 1rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.emptyState {
+  text-align: center;
+  padding: 3rem;
+  background: #1a1a2e;
+  border-radius: 20px;
+  color: #a0a0b0;
+}
+
+.emptyState p:first-child {
+  margin-bottom: 0.5rem;
+}
+
+.productsTable {
+  background: #1a1a2e;
+  border-radius: 20px;
+  padding: 1.5rem;
+  overflow-x: auto;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+
+th {
+  text-align: left;
+  padding: 1rem;
+  color: #f97316;
+  border-bottom: 1px solid #ffffff20;
+}
+
+td {
+  padding: 1rem;
+  border-bottom: 1px solid #ffffff10;
+}
+
+.emptyTable {
+  text-align: center;
+  color: #a0a0b0;
+}
+
+.editBtn, .deleteBtn {
+  background: transparent;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  margin: 0 0.25rem;
+  opacity: 0.5;
+  transition: 0.3s;
+}
+
+.editBtn:hover, .deleteBtn:hover {
+  opacity: 1;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: #1a1a2e;
+  border-radius: 20px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 600px;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.modalContent h2 {
+  margin-bottom: 1.5rem;
+}
+
+.formFields {
+  max-height: 60vh;
+  overflow-y: auto;
+  padding-right: 0.5rem;
+}
+
+.formGroup {
+  margin-bottom: 1rem;
+}
+
+.formGroup label {
+  display: block;
+  margin-bottom: 0.5rem;
+  color: #a0a0b0;
+}
+
+.formGroup input,
+.formGroup select,
+.formGroup textarea {
+  width: 100%;
+  background: #0a0c15;
+  border: 1px solid #ffffff20;
+  padding: 0.8rem;
+  border-radius: 12px;
+  color: #ffffff;
+  font-family: inherit;
+}
+
+.formGroup textarea {
+  resize: vertical;
+}
+
+.required {
+  color: #f97316;
+  margin-left: 0.25rem;
+}
+
+.checkboxLabel {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  cursor: pointer;
+}
+
+.checkboxLabel input {
+  width: auto;
+}
+
+.modalButtons {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+  margin-top: 1.5rem;
+}
+
+.modalButtons button {
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #0a0c15;
+  border: 1px solid #ffffff20;
+  color: #ffffff;
+}

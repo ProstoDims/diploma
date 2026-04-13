@@ -1,0 +1,221 @@
+.storePage {
+  padding: 1rem;
+}
+
+.header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 1rem;
+  margin-bottom: 2rem;
+}
+
+.storesGrid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
+  gap: 1.5rem;
+}
+
+.storeCard {
+  background: #1a1a2e;
+  border-radius: 20px;
+  padding: 1.5rem;
+  border: 1px solid #ffffff10;
+  transition: 0.3s;
+}
+
+.storeCard:hover {
+  transform: translateY(-5px);
+  border-color: #f9731630;
+}
+
+.cardHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.icon {
+  font-size: 2.5rem;
+}
+
+.deleteBtn {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: 0.3s;
+}
+
+.deleteBtn:hover {
+  opacity: 1;
+}
+
+.storeCard h3 {
+  font-size: 1.3rem;
+  margin-bottom: 0.5rem;
+  color: #f97316;
+}
+
+.storeCard p {
+  color: #a0a0b0;
+  margin-bottom: 0.5rem;
+}
+
+.productsSection {
+  margin-top: 1rem;
+  padding-top: 1rem;
+  border-top: 1px solid #ffffff10;
+}
+
+.productsHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.8rem;
+  font-weight: 600;
+}
+
+.addProductBtn {
+  background: #0a0c15;
+  border: 1px solid #f97316;
+  padding: 0.3rem 0.8rem;
+  border-radius: 8px;
+  color: #f97316;
+  cursor: pointer;
+  font-size: 0.8rem;
+  transition: 0.3s;
+}
+
+.addProductBtn:hover {
+  background: #f97316;
+  color: #ffffff;
+}
+
+.productsList {
+  max-height: 300px;
+  overflow-y: auto;
+}
+
+.productItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 0.5rem;
+  background: #0a0c15;
+  border-radius: 10px;
+  margin-bottom: 0.5rem;
+}
+
+.productInfo {
+  flex: 1;
+}
+
+.productName {
+  display: block;
+  font-weight: 500;
+  margin-bottom: 0.2rem;
+}
+
+.productPrice {
+  font-size: 0.8rem;
+  color: #f97316;
+}
+
+.productActions {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.quantityInput {
+  width: 70px;
+  background: #1a1a2e;
+  border: 1px solid #ffffff20;
+  padding: 0.3rem;
+  border-radius: 6px;
+  color: #ffffff;
+  text-align: center;
+}
+
+.removeProductBtn {
+  background: transparent;
+  border: none;
+  color: #ff4444;
+  cursor: pointer;
+  font-size: 1rem;
+  opacity: 0.7;
+}
+
+.removeProductBtn:hover {
+  opacity: 1;
+}
+
+.emptyProducts {
+  text-align: center;
+  color: #a0a0b0;
+  padding: 1rem;
+}
+
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background: rgba(0, 0, 0, 0.8);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modalContent {
+  background: #1a1a2e;
+  border-radius: 20px;
+  padding: 2rem;
+  width: 90%;
+  max-width: 500px;
+}
+
+.modalContent h2 {
+  margin-bottom: 1rem;
+}
+
+.modalContent input,
+.modalContent select {
+  width: 100%;
+  background: #0a0c15;
+  border: 1px solid #ffffff20;
+  padding: 0.8rem;
+  border-radius: 12px;
+  color: #ffffff;
+  margin-bottom: 1rem;
+}
+
+.modalContent select option {
+  background: #1a1a2e;
+}
+
+.modalButtons {
+  display: flex;
+  gap: 1rem;
+  justify-content: flex-end;
+}
+
+.modalButtons button {
+  padding: 0.5rem 1.5rem;
+  border-radius: 8px;
+  cursor: pointer;
+  background: #0a0c15;
+  border: 1px solid #ffffff20;
+  color: #ffffff;
+}
+
+.modalButtons button:last-child {
+  background: linear-gradient(95deg, #f97316, #ea580c);
+  border: none;
+}
