@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import styles from "./WarehousePage.module.css";
+import { useNavigate } from "react-router-dom";
 
 const WarehousePage = () => {
+  const navigate = useNavigate();
   const [warehouses, setWarehouses] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [newWarehouse, setNewWarehouse] = useState({
@@ -64,6 +66,12 @@ const WarehousePage = () => {
             <h3>{warehouse.name}</h3>
             <p>{warehouse.address}</p>
             <p>{warehouse.phone}</p>
+            <button
+              className={styles.statsBtn}
+              onClick={() => navigate(`/warehouses/${warehouse.id}/statistics`)}
+            >
+              📊 Статистика склада
+            </button>
             <div className={styles.stats}>
               <span>📦 {warehouse.products?.length || 0} товаров</span>
             </div>

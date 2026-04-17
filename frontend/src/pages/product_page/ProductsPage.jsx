@@ -10,6 +10,9 @@ const ProductsPage = () => {
   const [editingProduct, setEditingProduct] = useState(null);
   const [selectedCategory, setSelectedCategory] = useState(null);
   const [formData, setFormData] = useState({});
+  const [searchTerm, setSearchTerm] = useState("");
+  const [categoryFilter, setCategoryFilter] = useState("all");
+  const [locationFilter, setLocationFilter] = useState("all");
 
   useEffect(() => {
     const savedProducts = localStorage.getItem("products");
@@ -161,6 +164,27 @@ const ProductsPage = () => {
     }
   };
 
+  // Фильтрация товаров
+  const filteredProducts = products.filter((product) => {
+    const matchesSearch =
+      product.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      product.categoryName.toLowerCase().includes(searchTerm.toLowerCase());
+    const matchesCategory =
+      categoryFilter === "all" ||
+      product.categoryId === parseInt(categoryFilter);
+    const matchesLocation =
+      locationFilter === "all" || product.locationType === locationFilter;
+    return matchesSearch && matchesCategory && matchesLocation;
+  });
+
+  const totalValue = filteredProducts.reduce(
+    (sum, p) => sum + p.price * (p.quantity || 0),
+    0,
+  );
+  const lowStockProducts = filteredProducts.filter(
+    (p) => (p.quantity || 0) < 10,
+  ).length;
+
   return (
     <div className={styles.productsPage}>
       <div className={styles.header}>
@@ -172,8 +196,79 @@ const ProductsPage = () => {
         </button>
       </div>
 
+      {/* Статистика */}
+      <div className={styles.statsBar}>
+        <div className={styles.statItem}>
+          <span className={styles.statLabel}>Всего товаров</span>
+          <span className={styles.statValue}>{filteredProducts.length}</span>
+        </div>
+        <div className={styles.statItem}>
+          <span className={styles.statLabel}>Общая стоимость</span>
+          <span className={styles.statValue}>
+            {totalValue.toLocaleString()} ₽
+          </span>
+        </div>
+        <div className={styles.statItem}>
+          <span className={styles.statLabel}>Товаров 10 шт</span>
+          <span
+            className={styles.statValue}
+            style={{ color: lowStockProducts > 0 ? "#ff9800" : "#4caf50" }}
+          >
+            {lowStockProducts}
+          </span>
+        </div>
+      </div>
+
+      {/* Фильтры */}
+      <div className={styles.filters}>
+        <div className={styles.searchBox}>
+          <input
+            type="text"
+            placeholder="🔍 Поиск по названию или категории..."
+            value={searchTerm}
+            onChange={(e) => setSearchTerm(e.target.value)}
+            className={styles.searchInput}
+          />
+        </div>
+        <select
+          className={styles.filterSelect}
+          value={categoryFilter}
+          onChange={(e) => setCategoryFilter(e.target.value)}
+        >
+          <option value="all">Все категории</option>
+          {categories.map((cat) => (
+            <option key={cat.id} value={cat.id}>
+              {cat.name}
+            </option>
+          ))}
+        </select>
+        <select
+          className={styles.filterSelect}
+          value={locationFilter}
+          onChange={(e) => setLocationFilter(e.target.value)}
+        >
+          <option value="all">Все локации</option>
+          <option value="store">Магазины</option>
+          <option value="warehouse">Склады</option>
+        </select>
+        {(searchTerm ||
+          categoryFilter !== "all" ||
+          locationFilter !== "all") && (
+          <button
+            className={styles.clearFilters}
+            onClick={() => {
+              setSearchTerm("");
+              setCategoryFilter("all");
+              setLocationFilter("all");
+            }}
+          >
+            ✕ Очистить
+          </button>
+        )}
+      </div>
+
       <div className={styles.productsTable}>
-        <table>
+        <table className={styles.table}>
           <thead>
             <tr>
               <th>Категория</th>
@@ -181,45 +276,66 @@ const ProductsPage = () => {
               <th>Цена</th>
               <th>Местоположение</th>
               <th>Количество</th>
+              <th>Статус</th>
               <th>Действия</th>
             </tr>
           </thead>
           <tbody>
-            {products.map((product) => {
-              const category = categories.find(
-                (c) => c.id === product.categoryId,
-              );
-              const visibleFields =
-                category?.fields.filter((f) => f.visible) || [];
-
-              return (
-                <tr key={product.id}>
-                  <td>{product.categoryName}</td>
-                  <td>{product.name}</td>
-                  <td>{product.price} ₽</td>
-                  <td>{getLocationName(product)}</td>
-                  <td>{product.quantity || 0} шт</td>
-                  <td>
-                    <button
-                      onClick={() => openEditModal(product)}
-                      className={styles.editBtn}
-                    >
-                      ✏️
-                    </button>
-                    <button
-                      onClick={() => deleteProduct(product.id)}
-                      className={styles.deleteBtn}
-                    >
-                      🗑️
-                    </button>
-                  </td>
-                </tr>
-              );
-            })}
-            {products.length === 0 && (
+            {filteredProducts.map((product) => (
+              <tr key={product.id}>
+                <td className={styles.categoryCell}>{product.categoryName}</td>
+                <td className={styles.productName}>{product.name}</td>
+                <td className={styles.price}>
+                  {product.price.toLocaleString()} ₽
+                </td>
+                <td>{getLocationName(product)}</td>
+                <td
+                  className={
+                    (product.quantity || 0) < 10
+                      ? styles.lowStock
+                      : styles.normalStock
+                  }
+                >
+                  {product.quantity || 0} шт
+                </td>
+                <td>
+                  {(product.quantity || 0) === 0 && (
+                    <span className={styles.badgeDanger}>Нет в наличии</span>
+                  )}
+                  {(product.quantity || 0) > 0 &&
+                    (product.quantity || 0) < 10 && (
+                      <span className={styles.badgeWarning}>Остаток мал</span>
+                    )}
+                  {(product.quantity || 0) >= 10 && (
+                    <span className={styles.badgeSuccess}>В наличии</span>
+                  )}
+                </td>
+                <td className={styles.actions}>
+                  <button
+                    onClick={() => openEditModal(product)}
+                    className={styles.editBtn}
+                    title="Редактировать"
+                  >
+                    ✏️
+                  </button>
+                  <button
+                    onClick={() => deleteProduct(product.id)}
+                    className={styles.deleteBtn}
+                    title="Удалить"
+                  >
+                    🗑️
+                  </button>
+                </td>
+              </tr>
+            ))}
+            {filteredProducts.length === 0 && (
               <tr>
-                <td colSpan="6" className={styles.emptyTable}>
-                  Нет товаров. Нажмите "Добавить товар"
+                <td colSpan="7" className={styles.emptyTable}>
+                  {searchTerm ||
+                  categoryFilter !== "all" ||
+                  locationFilter !== "all"
+                    ? "Товары не найдены по заданным фильтрам"
+                    : 'Нет товаров. Нажмите "Добавить товар"'}
                 </td>
               </tr>
             )}
@@ -243,10 +359,10 @@ const ProductsPage = () => {
                   onClick={() => selectCategory(category)}
                 >
                   <div className={styles.categoryIcon}>📂</div>
-                  <div>
+                  <div className={styles.categoryInfo}>
                     <h3>{category.name}</h3>
-                    <p>{category.description}</p>
-                    <small>{category.fields.length} полей</small>
+                    <p>{category.description || "Нет описания"}</p>
+                    <small>{category.fields.length} дополнительных полей</small>
                   </div>
                 </button>
               ))}
@@ -266,9 +382,9 @@ const ProductsPage = () => {
             onClick={(e) => e.stopPropagation()}
           >
             <h2>{editingProduct ? "Редактировать" : "Добавить"} товар</h2>
-            <h3 className={styles.categoryBadge}>
-              Категория: {selectedCategory.name}
-            </h3>
+            <div className={styles.categoryBadge}>
+              📂 Категория: <strong>{selectedCategory.name}</strong>
+            </div>
 
             <div className={styles.formFields}>
               <div className={styles.formGroup}>
@@ -283,60 +399,17 @@ const ProductsPage = () => {
                 />
               </div>
 
-              <div className={styles.formGroup}>
-                <label>Цена *</label>
-                <input
-                  type="number"
-                  placeholder="Цена"
-                  value={formData.price || ""}
-                  onChange={(e) =>
-                    setFormData({ ...formData, price: e.target.value })
-                  }
-                />
-              </div>
-
               <div className={styles.formRow}>
                 <div className={styles.formGroup}>
-                  <label>Тип расположения</label>
-                  <select
-                    value={formData.locationType || "store"}
+                  <label>Цена *</label>
+                  <input
+                    type="number"
+                    placeholder="Цена"
+                    value={formData.price || ""}
                     onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        locationType: e.target.value,
-                        locationId: "",
-                      })
+                      setFormData({ ...formData, price: e.target.value })
                     }
-                  >
-                    <option value="store">Магазин</option>
-                    <option value="warehouse">Склад</option>
-                  </select>
-                </div>
-
-                <div className={styles.formGroup}>
-                  <label>
-                    Выберите{" "}
-                    {formData.locationType === "store" ? "магазин" : "склад"}
-                  </label>
-                  <select
-                    value={formData.locationId || ""}
-                    onChange={(e) =>
-                      setFormData({
-                        ...formData,
-                        locationId: parseInt(e.target.value),
-                      })
-                    }
-                  >
-                    <option value="">Выберите...</option>
-                    {(formData.locationType === "store"
-                      ? stores
-                      : warehouses
-                    ).map((location) => (
-                      <option key={location.id} value={location.id}>
-                        {location.name}
-                      </option>
-                    ))}
-                  </select>
+                  />
                 </div>
 
                 <div className={styles.formGroup}>
@@ -353,21 +426,67 @@ const ProductsPage = () => {
                 </div>
               </div>
 
-              <div className={styles.divider}>
-                Дополнительные поля категории
+              <div className={styles.formGroup}>
+                <label>Тип расположения</label>
+                <select
+                  value={formData.locationType || "store"}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      locationType: e.target.value,
+                      locationId: "",
+                    })
+                  }
+                >
+                  <option value="store">🏬 Магазин</option>
+                  <option value="warehouse">🏪 Склад</option>
+                </select>
               </div>
 
-              {selectedCategory.fields.map((field) => (
-                <div key={field.id} className={styles.formGroup}>
-                  <label>
-                    {field.label}
-                    {field.required && (
-                      <span className={styles.required}>*</span>
-                    )}
-                  </label>
-                  {renderFieldInput(field)}
-                </div>
-              ))}
+              <div className={styles.formGroup}>
+                <label>
+                  Выберите{" "}
+                  {formData.locationType === "store" ? "магазин" : "склад"}
+                </label>
+                <select
+                  value={formData.locationId || ""}
+                  onChange={(e) =>
+                    setFormData({
+                      ...formData,
+                      locationId: parseInt(e.target.value),
+                    })
+                  }
+                >
+                  <option value="">Выберите...</option>
+                  {(formData.locationType === "store"
+                    ? stores
+                    : warehouses
+                  ).map((location) => (
+                    <option key={location.id} value={location.id}>
+                      {location.name}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              {selectedCategory.fields.length > 0 && (
+                <>
+                  <div className={styles.divider}>
+                    Дополнительные характеристики
+                  </div>
+                  {selectedCategory.fields.map((field) => (
+                    <div key={field.id} className={styles.formGroup}>
+                      <label>
+                        {field.label}
+                        {field.required && (
+                          <span className={styles.required}>*</span>
+                        )}
+                      </label>
+                      {renderFieldInput(field)}
+                    </div>
+                  ))}
+                </>
+              )}
             </div>
 
             <div className={styles.modalButtons}>

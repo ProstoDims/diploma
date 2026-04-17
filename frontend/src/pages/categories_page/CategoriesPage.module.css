@@ -11,6 +11,76 @@
   margin-bottom: 2rem;
 }
 
+.headerActions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+/* Статистика */
+.statsBar {
+  display: flex;
+  gap: 1.5rem;
+  background: #1a1a2e;
+  border-radius: 20px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  border: 1px solid #ffffff10;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  color: #a0a0b0;
+}
+
+.statValue {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #f97316;
+}
+
+/* Поиск */
+.searchBox {
+  position: relative;
+  margin-bottom: 1.5rem;
+}
+
+.searchInput {
+  width: 100%;
+  background: #0a0c15;
+  border: 1px solid #ffffff20;
+  padding: 0.8rem 2.5rem 0.8rem 1rem;
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 0.9rem;
+}
+
+.searchInput::placeholder {
+  color: #a0a0b0;
+}
+
+.clearSearch {
+  position: absolute;
+  right: 10px;
+  top: 50%;
+  transform: translateY(-50%);
+  background: transparent;
+  border: none;
+  color: #a0a0b0;
+  cursor: pointer;
+  font-size: 1rem;
+}
+
+.clearSearch:hover {
+  color: #ff4444;
+}
+
 .categoriesGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(380px, 1fr));
@@ -37,8 +107,27 @@
   margin-bottom: 1rem;
 }
 
+.cardActions {
+  display: flex;
+  gap: 0.5rem;
+}
+
 .icon {
-  font-size: 2rem;
+  font-size: 2.5rem;
+}
+
+.editBtn {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: 0.3s;
+}
+
+.editBtn:hover {
+  opacity: 1;
+  transform: scale(1.1);
 }
 
 .deleteBtn {
@@ -47,6 +136,11 @@
   font-size: 1.2rem;
   cursor: pointer;
   opacity: 0.5;
+  transition: 0.3s;
+}
+
+.deleteBtn:hover {
+  opacity: 1;
 }
 
 .categoryCard h3 {
@@ -59,6 +153,7 @@
   color: #a0a0b0;
   margin-bottom: 1rem;
   font-size: 0.9rem;
+  line-height: 1.4;
 }
 
 .fieldsSection {
@@ -73,6 +168,7 @@
   align-items: center;
   margin-bottom: 0.8rem;
   font-weight: 600;
+  color: #ffffff;
 }
 
 .addFieldBtn {
@@ -83,6 +179,12 @@
   color: #f97316;
   cursor: pointer;
   font-size: 0.8rem;
+  transition: 0.3s;
+}
+
+.addFieldBtn:hover {
+  background: #f97316;
+  color: #ffffff;
 }
 
 .fieldsList {
@@ -94,7 +196,7 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
-  padding: 0.5rem;
+  padding: 0.8rem;
   background: #0a0c15;
   border-radius: 10px;
   margin-bottom: 0.5rem;
@@ -111,8 +213,8 @@
 }
 
 .required {
-  color: #f97316;
-  margin-left: 0.25rem;
+  color: #ff4444;
+  margin-left: 0.2rem;
 }
 
 .fieldType {
@@ -123,7 +225,7 @@
 .fieldActions {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.8rem;
 }
 
 .switch {
@@ -132,6 +234,11 @@
   gap: 0.3rem;
   font-size: 0.7rem;
   cursor: pointer;
+  color: #a0a0b0;
+}
+
+.switch input {
+  cursor: pointer;
 }
 
 .removeFieldBtn {
@@ -139,15 +246,48 @@
   border: none;
   color: #ff4444;
   cursor: pointer;
+  font-size: 1rem;
+  opacity: 0.7;
+}
+
+.removeFieldBtn:hover {
+  opacity: 1;
 }
 
 .emptyFields {
   text-align: center;
   color: #a0a0b0;
+  padding: 1rem;
   font-size: 0.8rem;
-  padding: 0.5rem;
 }
 
+/* Пустое состояние */
+.emptyState {
+  text-align: center;
+  padding: 3rem;
+  background: #1a1a2e;
+  border-radius: 20px;
+  margin-top: 2rem;
+  border: 1px solid #ffffff10;
+}
+
+.emptyIcon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.emptyState h3 {
+  margin-bottom: 0.5rem;
+  color: #ffffff;
+}
+
+.emptyState p {
+  color: #a0a0b0;
+  margin-bottom: 1.5rem;
+}
+
+/* Модальные окна */
 .modal {
   position: fixed;
   top: 0;
@@ -167,6 +307,12 @@
   padding: 2rem;
   width: 90%;
   max-width: 500px;
+  border: 1px solid #ffffff10;
+}
+
+.modalContent h2 {
+  margin-bottom: 1rem;
+  color: #f97316;
 }
 
 .modalContent input,
@@ -179,10 +325,29 @@
   border-radius: 12px;
   color: #ffffff;
   margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.modalContent input:focus,
+.modalContent select:focus,
+.modalContent textarea:focus {
+  outline: none;
+  border-color: #f97316;
 }
 
 .checkboxGroup {
-  margin: 1rem 0;
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1rem;
+  flex-wrap: wrap;
+}
+
+.checkboxGroup label {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  color: #a0a0b0;
+  cursor: pointer;
 }
 
 .modalButtons {
@@ -199,4 +364,43 @@
   background: #0a0c15;
   border: 1px solid #ffffff20;
   color: #ffffff;
+  transition: 0.3s;
+}
+
+.modalButtons button:hover {
+  background: #1a1a2e;
+  border-color: #f97316;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .statsBar {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  
+  .statItem {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .categoriesGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .fieldItem {
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+  
+  .fieldActions {
+    justify-content: flex-end;
+    width: 100%;
+  }
+  
+  .modalContent {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
 }

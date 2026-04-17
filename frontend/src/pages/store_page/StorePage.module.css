@@ -219,3 +219,20 @@
   background: linear-gradient(95deg, #f97316, #ea580c);
   border: none;
 }
+
+.statsBtn {
+  width: 100%;
+  margin-top: 1rem;
+  background: linear-gradient(95deg, #f97316, #ea580c);
+  border: none;
+  padding: 0.8rem;
+  border-radius: 12px;
+  color: white;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.statsBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 5px 20px rgba(249, 115, 22, 0.3);
+}

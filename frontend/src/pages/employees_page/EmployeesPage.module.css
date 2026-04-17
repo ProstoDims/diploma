@@ -11,6 +11,110 @@
   margin-bottom: 2rem;
 }
 
+.headerActions {
+  display: flex;
+  gap: 1rem;
+  align-items: center;
+}
+
+.exportBtn {
+  background: transparent;
+  border: 1px solid #4caf50;
+  padding: 0.5rem 1rem;
+  border-radius: 8px;
+  color: #4caf50;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 0.9rem;
+}
+
+.exportBtn:hover {
+  background: #4caf50;
+  color: #ffffff;
+}
+
+/* Статистическая панель */
+.statsBar {
+  display: flex;
+  gap: 1.5rem;
+  background: #1a1a2e;
+  border-radius: 20px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  border: 1px solid #ffffff10;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.statLabel {
+  font-size: 0.75rem;
+  color: #a0a0b0;
+}
+
+.statValue {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #f97316;
+}
+
+/* Фильтры */
+.filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.searchBox {
+  flex: 1;
+  min-width: 200px;
+}
+
+.searchInput {
+  width: 100%;
+  background: #0a0c15;
+  border: 1px solid #ffffff20;
+  padding: 0.8rem;
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 0.9rem;
+}
+
+.searchInput::placeholder {
+  color: #a0a0b0;
+}
+
+.filterSelect {
+  background: #0a0c15;
+  border: 1px solid #ffffff20;
+  padding: 0.8rem;
+  border-radius: 12px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.clearFilter {
+  background: transparent;
+  border: 1px solid #ff9800;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  color: #ff9800;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 0.9rem;
+}
+
+.clearFilter:hover {
+  background: #ff9800;
+  color: #1a1a2e;
+}
+
 .employeesGrid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
@@ -37,8 +141,34 @@
   margin-bottom: 1rem;
 }
 
+.cardActions {
+  display: flex;
+  gap: 0.5rem;
+}
+
 .avatar {
   font-size: 3rem;
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: #0a0c15;
+}
+
+.editBtn {
+  background: transparent;
+  border: none;
+  font-size: 1.2rem;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: 0.3s;
+}
+
+.editBtn:hover {
+  opacity: 1;
+  transform: scale(1.1);
 }
 
 .deleteBtn {
@@ -57,6 +187,7 @@
 .employeeCard h3 {
   font-size: 1.3rem;
   margin-bottom: 0.3rem;
+  color: #ffffff;
 }
 
 .position {
@@ -67,6 +198,33 @@
   border-radius: 20px;
   font-size: 0.8rem;
   margin-bottom: 1rem;
+}
+
+/* KPI карточки */
+.kpiGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 0.5rem;
+  margin: 1rem 0;
+  padding: 0.8rem;
+  background: #0a0c15;
+  border-radius: 12px;
+}
+
+.kpiItem {
+  text-align: center;
+}
+
+.kpiValue {
+  font-size: 1rem;
+  font-weight: bold;
+  color: #f97316;
+}
+
+.kpiLabel {
+  font-size: 0.7rem;
+  color: #a0a0b0;
+  margin-top: 0.2rem;
 }
 
 .contactInfo {
@@ -91,6 +249,7 @@
   align-items: center;
   margin-bottom: 0.8rem;
   font-weight: 600;
+  color: #ffffff;
 }
 
 .assignBtn {
@@ -123,6 +282,7 @@
   border-radius: 10px;
   margin-bottom: 0.5rem;
   font-size: 0.9rem;
+  color: #ffffff;
 }
 
 .removeAssignBtn {
@@ -131,6 +291,7 @@
   color: #ff4444;
   cursor: pointer;
   opacity: 0.7;
+  font-size: 1rem;
 }
 
 .removeAssignBtn:hover {
@@ -144,6 +305,33 @@
   font-size: 0.8rem;
 }
 
+/* Пустое состояние */
+.emptyState {
+  text-align: center;
+  padding: 3rem;
+  background: #1a1a2e;
+  border-radius: 20px;
+  margin-top: 2rem;
+  border: 1px solid #ffffff10;
+}
+
+.emptyIcon {
+  font-size: 4rem;
+  margin-bottom: 1rem;
+  opacity: 0.5;
+}
+
+.emptyState h3 {
+  margin-bottom: 0.5rem;
+  color: #ffffff;
+}
+
+.emptyState p {
+  color: #a0a0b0;
+  margin-bottom: 1.5rem;
+}
+
+/* Модальные окна */
 .modal {
   position: fixed;
   top: 0;
@@ -163,10 +351,12 @@
   padding: 2rem;
   width: 90%;
   max-width: 500px;
+  border: 1px solid #ffffff10;
 }
 
 .modalContent h2 {
   margin-bottom: 1rem;
+  color: #f97316;
 }
 
 .modalContent h3 {
@@ -184,6 +374,13 @@
   border-radius: 12px;
   color: #ffffff;
   margin-bottom: 1rem;
+  font-size: 0.9rem;
+}
+
+.modalContent input:focus,
+.modalContent select:focus {
+  outline: none;
+  border-color: #f97316;
 }
 
 .locationsList {
@@ -204,11 +401,30 @@
   cursor: pointer;
   text-align: left;
   transition: 0.3s;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
 }
 
-.locationBtn:hover {
+.locationBtn:hover:not(:disabled) {
   border-color: #f97316;
   background: #f9731610;
+  transform: translateX(5px);
+}
+
+.locationBtn.assigned {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+.assignedBadge {
+  color: #4caf50;
+  font-weight: bold;
+}
+
+.locationBtn:disabled {
+  cursor: not-allowed;
+  opacity: 0.5;
 }
 
 .modalButtons {
@@ -225,4 +441,58 @@
   background: #0a0c15;
   border: 1px solid #ffffff20;
   color: #ffffff;
+  transition: 0.3s;
+}
+
+.modalButtons button:hover {
+  background: #1a1a2e;
+  border-color: #f97316;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .statsBar {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  
+  .statItem {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .filters {
+    flex-direction: column;
+  }
+  
+  .searchBox {
+    width: 100%;
+  }
+  
+  .filterSelect {
+    width: 100%;
+  }
+  
+  .clearFilter {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .employeesGrid {
+    grid-template-columns: 1fr;
+  }
+  
+  .kpiGrid {
+    grid-template-columns: repeat(3, 1fr);
+  }
+  
+  .kpiValue {
+    font-size: 0.9rem;
+  }
+  
+  .modalContent {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
 }

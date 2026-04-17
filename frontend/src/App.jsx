@@ -12,6 +12,8 @@ import CategoriesPage from "./pages/categories_page/CategoriesPage";
 import ProductsPage from "./pages/product_page/ProductsPage";
 import EmployeesPage from "./pages/employees_page/EmployeesPage";
 import "./index.css";
+import StoreStatisticsPage from "./pages/store_statistic_page/StoreStatisticsPage";
+import WarehouseStatisticsPage from "./pages/warehouse_statistic_page/WarehouseStatisticsPage";
 
 function App() {
   return (
@@ -102,6 +104,14 @@ function App() {
               </LayoutDashboard>
             </ProtectedRoute>
           }
+        />
+        <Route
+          path="/stores/:id/statistics"
+          element={<StoreStatisticsPage />}
+        />
+        <Route
+          path="/warehouses/:id/statistics"
+          element={<WarehouseStatisticsPage />}
         />
       </Routes>
     </BrowserRouter>

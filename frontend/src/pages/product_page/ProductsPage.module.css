@@ -11,61 +11,209 @@
   margin-bottom: 2rem;
 }
 
-.emptyState {
-  text-align: center;
-  padding: 3rem;
+/* Статистика */
+.statsBar {
+  display: flex;
+  gap: 1.5rem;
   background: #1a1a2e;
   border-radius: 20px;
+  padding: 1rem 1.5rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  border: 1px solid #ffffff10;
+}
+
+.statItem {
+  display: flex;
+  flex-direction: column;
+}
+
+.statLabel {
+  font-size: 0.75rem;
   color: #a0a0b0;
 }
 
-.emptyState p:first-child {
-  margin-bottom: 0.5rem;
+.statValue {
+  font-size: 1.3rem;
+  font-weight: bold;
+  color: #f97316;
 }
 
+/* Фильтры */
+.filters {
+  display: flex;
+  gap: 1rem;
+  margin-bottom: 1.5rem;
+  flex-wrap: wrap;
+  align-items: center;
+}
+
+.searchBox {
+  flex: 1;
+  min-width: 200px;
+}
+
+.searchInput {
+  width: 100%;
+  background: #0a0c15;
+  border: 1px solid #ffffff20;
+  padding: 0.8rem;
+  border-radius: 12px;
+  color: #ffffff;
+  font-size: 0.9rem;
+}
+
+.searchInput::placeholder {
+  color: #a0a0b0;
+}
+
+.filterSelect {
+  background: #0a0c15;
+  border: 1px solid #ffffff20;
+  padding: 0.8rem;
+  border-radius: 12px;
+  color: #ffffff;
+  cursor: pointer;
+  font-size: 0.9rem;
+  min-width: 150px;
+}
+
+.clearFilters {
+  background: transparent;
+  border: 1px solid #ff9800;
+  padding: 0.8rem 1rem;
+  border-radius: 12px;
+  color: #ff9800;
+  cursor: pointer;
+  transition: 0.3s;
+  font-size: 0.9rem;
+}
+
+.clearFilters:hover {
+  background: #ff9800;
+  color: #1a1a2e;
+}
+
+/* Таблица */
 .productsTable {
   background: #1a1a2e;
   border-radius: 20px;
-  padding: 1.5rem;
+  padding: 1rem;
   overflow-x: auto;
+  border: 1px solid #ffffff10;
 }
 
-table {
+.table {
   width: 100%;
   border-collapse: collapse;
 }
 
-th {
+.table th,
+.table td {
+  padding: 1rem;
   text-align: left;
-  padding: 1rem;
-  color: #f97316;
-  border-bottom: 1px solid #ffffff20;
-}
-
-td {
-  padding: 1rem;
   border-bottom: 1px solid #ffffff10;
 }
 
-.emptyTable {
-  text-align: center;
+.table th {
   color: #a0a0b0;
+  font-weight: 500;
+  font-size: 0.9rem;
 }
 
-.editBtn, .deleteBtn {
+.table tr:hover {
+  background: #ffffff05;
+}
+
+.categoryCell {
+  color: #f97316;
+}
+
+.productName {
+  font-weight: 500;
+}
+
+.price {
+  color: #4caf50;
+  font-weight: 500;
+}
+
+.lowStock {
+  color: #ff9800;
+  font-weight: 500;
+}
+
+.normalStock {
+  color: #4caf50;
+}
+
+/* Бейджи статуса */
+.badgeDanger {
+  display: inline-block;
+  background: rgba(255, 68, 68, 0.2);
+  color: #ff4444;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.7rem;
+}
+
+.badgeWarning {
+  display: inline-block;
+  background: rgba(255, 152, 0, 0.2);
+  color: #ff9800;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.7rem;
+}
+
+.badgeSuccess {
+  display: inline-block;
+  background: rgba(76, 175, 80, 0.2);
+  color: #4caf50;
+  padding: 0.2rem 0.6rem;
+  border-radius: 20px;
+  font-size: 0.7rem;
+}
+
+.actions {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.editBtn {
   background: transparent;
   border: none;
   font-size: 1.1rem;
   cursor: pointer;
-  margin: 0 0.25rem;
   opacity: 0.5;
   transition: 0.3s;
 }
 
-.editBtn:hover, .deleteBtn:hover {
+.editBtn:hover {
+  opacity: 1;
+  transform: scale(1.1);
+}
+
+.deleteBtn {
+  background: transparent;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  opacity: 0.5;
+  transition: 0.3s;
+}
+
+.deleteBtn:hover {
   opacity: 1;
 }
 
+.emptyTable {
+  text-align: center;
+  padding: 3rem;
+  color: #a0a0b0;
+}
+
+/* Модальные окна */
 .modal {
   position: fixed;
   top: 0;
@@ -84,50 +232,120 @@ td {
   border-radius: 20px;
   padding: 2rem;
   width: 90%;
-  max-width: 600px;
+  max-width: 550px;
   max-height: 80vh;
   overflow-y: auto;
+  border: 1px solid #ffffff10;
 }
 
 .modalContent h2 {
+  margin-bottom: 1rem;
+  color: #f97316;
+}
+
+.categoryBadge {
+  background: #0a0c15;
+  padding: 0.5rem 1rem;
+  border-radius: 10px;
   margin-bottom: 1.5rem;
+  font-size: 0.9rem;
+  color: #a0a0b0;
 }
 
-.formFields {
-  max-height: 60vh;
+.categoryBadge strong {
+  color: #f97316;
+}
+
+/* Список категорий */
+.categoriesList {
+  display: flex;
+  flex-direction: column;
+  gap: 0.8rem;
+  max-height: 400px;
   overflow-y: auto;
-  padding-right: 0.5rem;
-}
-
-.formGroup {
   margin-bottom: 1rem;
 }
 
+.categorySelectBtn {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  padding: 1rem;
+  background: #0a0c15;
+  border: 1px solid #ffffff20;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: 0.3s;
+  text-align: left;
+}
+
+.categorySelectBtn:hover {
+  background: #1a1a2e;
+  border-color: #f97316;
+  transform: translateX(5px);
+}
+
+.categoryIcon {
+  font-size: 2rem;
+}
+
+.categoryInfo h3 {
+  margin: 0;
+  font-size: 1rem;
+  color: #f97316;
+}
+
+.categoryInfo p {
+  margin: 0.2rem 0;
+  font-size: 0.8rem;
+  color: #a0a0b0;
+}
+
+.categoryInfo small {
+  font-size: 0.7rem;
+  color: #a0a0b0;
+}
+
+/* Форма */
+.formFields {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.formRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 1rem;
+}
+
+.formGroup {
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+}
+
 .formGroup label {
-  display: block;
-  margin-bottom: 0.5rem;
+  font-size: 0.8rem;
   color: #a0a0b0;
 }
 
 .formGroup input,
 .formGroup select,
 .formGroup textarea {
-  width: 100%;
   background: #0a0c15;
   border: 1px solid #ffffff20;
-  padding: 0.8rem;
-  border-radius: 12px;
+  padding: 0.7rem;
+  border-radius: 10px;
   color: #ffffff;
-  font-family: inherit;
+  font-size: 0.9rem;
 }
 
-.formGroup textarea {
-  resize: vertical;
-}
-
-.required {
-  color: #f97316;
-  margin-left: 0.25rem;
+.formGroup input:focus,
+.formGroup select:focus,
+.formGroup textarea:focus {
+  outline: none;
+  border-color: #f97316;
 }
 
 .checkboxLabel {
@@ -137,8 +355,18 @@ td {
   cursor: pointer;
 }
 
-.checkboxLabel input {
-  width: auto;
+.divider {
+  text-align: center;
+  padding: 0.5rem;
+  color: #a0a0b0;
+  font-size: 0.8rem;
+  border-top: 1px solid #ffffff10;
+  margin-top: 0.5rem;
+}
+
+.required {
+  color: #ff4444;
+  margin-left: 0.2rem;
 }
 
 .modalButtons {
@@ -155,4 +383,59 @@ td {
   background: #0a0c15;
   border: 1px solid #ffffff20;
   color: #ffffff;
+  transition: 0.3s;
+}
+
+.modalButtons button:hover {
+  background: #1a1a2e;
+  border-color: #f97316;
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+  .statsBar {
+    flex-direction: column;
+    gap: 0.8rem;
+  }
+  
+  .statItem {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+  }
+  
+  .filters {
+    flex-direction: column;
+  }
+  
+  .searchBox {
+    width: 100%;
+  }
+  
+  .filterSelect {
+    width: 100%;
+  }
+  
+  .clearFilters {
+    width: 100%;
+    text-align: center;
+  }
+  
+  .formRow {
+    grid-template-columns: 1fr;
+  }
+  
+  .modalContent {
+    padding: 1.5rem;
+    margin: 1rem;
+  }
+  
+  .table {
+    font-size: 0.8rem;
+  }
+  
+  .table th,
+  .table td {
+    padding: 0.5rem;
+  }
 }

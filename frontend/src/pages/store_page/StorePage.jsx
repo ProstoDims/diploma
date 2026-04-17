@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import styles from "./StorePage.module.css";
+import { useNavigate } from "react-router-dom";
 
 const StorePage = () => {
+  const navigate = useNavigate();
   const [stores, setStores] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [showProductModal, setShowProductModal] = useState(false);
@@ -139,7 +141,12 @@ const StorePage = () => {
             <p>📍 {store.address}</p>
             <p>📞 {store.phone}</p>
             <p>🕐 {store.workingHours}</p>
-
+            <button
+              className={styles.statsBtn}
+              onClick={() => navigate(`/stores/${store.id}/statistics`)}
+            >
+              📊 Статистика магазина
+            </button>
             <div className={styles.productsSection}>
               <div className={styles.productsHeader}>
                 <span>

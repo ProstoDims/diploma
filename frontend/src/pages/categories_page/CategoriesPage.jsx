@@ -5,7 +5,10 @@ const CategoriesPage = () => {
   const [categories, setCategories] = useState([]);
   const [showModal, setShowModal] = useState(false);
   const [showFieldModal, setShowFieldModal] = useState(false);
+  const [showEditModal, setShowEditModal] = useState(false);
   const [selectedCategory, setSelectedCategory] = useState(null);
+  const [editingCategory, setEditingCategory] = useState(null);
+  const [searchTerm, setSearchTerm] = useState("");
   const [newCategory, setNewCategory] = useState({
     name: "",
     description: "",
@@ -16,6 +19,7 @@ const CategoriesPage = () => {
     type: "text",
     required: false,
     visible: true,
+    options: [],
   });
 
   const fieldTypes = [
@@ -32,7 +36,6 @@ const CategoriesPage = () => {
     if (saved) {
       setCategories(JSON.parse(saved));
     } else {
-      // Примеры категорий
       const defaultCategories = [
         {
           id: 1,
@@ -127,15 +130,21 @@ const CategoriesPage = () => {
     if (!newCategory.name) return;
     const updated = [
       ...categories,
-      {
-        ...newCategory,
-        id: Date.now(),
-        fields: [],
-      },
+      { ...newCategory, id: Date.now(), fields: [] },
     ];
     saveCategories(updated);
     setNewCategory({ name: "", description: "", fields: [] });
     setShowModal(false);
+  };
+
+  const editCategory = () => {
+    if (!editingCategory) return;
+    const updated = categories.map((cat) =>
+      cat.id === editingCategory.id ? editingCategory : cat,
+    );
+    saveCategories(updated);
+    setShowEditModal(false);
+    setEditingCategory(null);
   };
 
   const deleteCategory = (id) => {
@@ -146,8 +155,6 @@ const CategoriesPage = () => {
     ) {
       const updated = categories.filter((c) => c.id !== id);
       saveCategories(updated);
-
-      // Удаляем товары этой категории
       const products = JSON.parse(localStorage.getItem("products") || "[]");
       const filteredProducts = products.filter((p) => p.categoryId !== id);
       localStorage.setItem("products", JSON.stringify(filteredProducts));
@@ -166,17 +173,20 @@ const CategoriesPage = () => {
       return cat;
     });
     saveCategories(updated);
-    setNewField({ label: "", type: "text", required: false, visible: true });
+    setNewField({
+      label: "",
+      type: "text",
+      required: false,
+      visible: true,
+      options: [],
+    });
     setShowFieldModal(false);
   };
 
   const deleteFieldFromCategory = (categoryId, fieldId) => {
     const updated = categories.map((cat) => {
       if (cat.id === categoryId) {
-        return {
-          ...cat,
-          fields: cat.fields.filter((f) => f.id !== fieldId),
-        };
+        return { ...cat, fields: cat.fields.filter((f) => f.id !== fieldId) };
       }
       return cat;
     });
@@ -198,31 +208,106 @@ const CategoriesPage = () => {
     saveCategories(updated);
   };
 
+  const getFieldIcon = (type) => {
+    return fieldTypes.find((t) => t.value === type)?.icon || "📝";
+  };
+
+  const getFieldLabel = (type) => {
+    return fieldTypes.find((t) => t.value === type)?.label || "Текст";
+  };
+
+  const filteredCategories = categories.filter(
+    (cat) =>
+      cat.name.toLowerCase().includes(searchTerm.toLowerCase()) ||
+      cat.description?.toLowerCase().includes(searchTerm.toLowerCase()),
+  );
+
+  const totalFields = categories.reduce(
+    (sum, cat) => sum + cat.fields.length,
+    0,
+  );
+
   return (
     <div className={styles.categoriesPage}>
       <div className={styles.header}>
         <h1 className="section-title">
           Категории <span>товаров</span>
         </h1>
-        <button className="cta-btn" onClick={() => setShowModal(true)}>
-          + Добавить категорию
-        </button>
+        <div className={styles.headerActions}>
+          <button className="cta-btn" onClick={() => setShowModal(true)}>
+            + Добавить категорию
+          </button>
+        </div>
+      </div>
+
+      {/* Статистика */}
+      <div className={styles.statsBar}>
+        <div className={styles.statItem}>
+          <span className={styles.statLabel}>Всего категорий</span>
+          <span className={styles.statValue}>{categories.length}</span>
+        </div>
+        <div className={styles.statItem}>
+          <span className={styles.statLabel}>Всего полей</span>
+          <span className={styles.statValue}>{totalFields}</span>
+        </div>
+        <div className={styles.statItem}>
+          <span className={styles.statLabel}>Среднее полей</span>
+          <span className={styles.statValue}>
+            {categories.length > 0
+              ? (totalFields / categories.length).toFixed(1)
+              : 0}
+          </span>
+        </div>
+      </div>
+
+      {/* Поиск */}
+      <div className={styles.searchBox}>
+        <input
+          type="text"
+          placeholder="🔍 Поиск категорий..."
+          value={searchTerm}
+          onChange={(e) => setSearchTerm(e.target.value)}
+          className={styles.searchInput}
+        />
+        {searchTerm && (
+          <button
+            className={styles.clearSearch}
+            onClick={() => setSearchTerm("")}
+          >
+            ✕
+          </button>
+        )}
       </div>
 
       <div className={styles.categoriesGrid}>
-        {categories.map((category) => (
+        {filteredCategories.map((category) => (
           <div key={category.id} className={styles.categoryCard}>
             <div className={styles.cardHeader}>
               <div className={styles.icon}>📂</div>
-              <button
-                className={styles.deleteBtn}
-                onClick={() => deleteCategory(category.id)}
-              >
-                🗑️
-              </button>
+              <div className={styles.cardActions}>
+                <button
+                  className={styles.editBtn}
+                  onClick={() => {
+                    setEditingCategory({ ...category });
+                    setShowEditModal(true);
+                  }}
+                  title="Редактировать"
+                >
+                  ✏️
+                </button>
+                <button
+                  className={styles.deleteBtn}
+                  onClick={() => deleteCategory(category.id)}
+                  title="Удалить"
+                >
+                  🗑️
+                </button>
+              </div>
             </div>
             <h3>{category.name}</h3>
-            <p className={styles.description}>{category.description}</p>
+            <p className={styles.description}>
+              {category.description || "Нет описания"}
+            </p>
 
             <div className={styles.fieldsSection}>
               <div className={styles.fieldsHeader}>
@@ -249,8 +334,7 @@ const CategoriesPage = () => {
                         )}
                       </span>
                       <span className={styles.fieldType}>
-                        {fieldTypes.find((t) => t.value === field.type)?.icon}{" "}
-                        {fieldTypes.find((t) => t.value === field.type)?.label}
+                        {getFieldIcon(field.type)} {getFieldLabel(field.type)}
                       </span>
                     </div>
                     <div className={styles.fieldActions}>
@@ -271,6 +355,7 @@ const CategoriesPage = () => {
                         onClick={() =>
                           deleteFieldFromCategory(category.id, field.id)
                         }
+                        title="Удалить поле"
                       >
                         ✕
                       </button>
@@ -288,6 +373,17 @@ const CategoriesPage = () => {
         ))}
       </div>
 
+      {filteredCategories.length === 0 && (
+        <div className={styles.emptyState}>
+          <div className={styles.emptyIcon}>📂</div>
+          <h3>Категории не найдены</h3>
+          <p>Попробуйте изменить поиск или добавьте новую категорию</p>
+          <button className="cta-btn" onClick={() => setShowModal(true)}>
+            + Добавить категорию
+          </button>
+        </div>
+      )}
+
       {/* Модальное окно добавления категории */}
       {showModal && (
         <div className={styles.modal} onClick={() => setShowModal(false)}>
@@ -298,7 +394,7 @@ const CategoriesPage = () => {
             <h2>Добавить категорию</h2>
             <input
               type="text"
-              placeholder="Название категории"
+              placeholder="Название категории *"
               value={newCategory.name}
               onChange={(e) =>
                 setNewCategory({ ...newCategory, name: e.target.value })
@@ -322,17 +418,54 @@ const CategoriesPage = () => {
         </div>
       )}
 
+      {/* Модальное окно редактирования категории */}
+      {showEditModal && editingCategory && (
+        <div className={styles.modal} onClick={() => setShowEditModal(false)}>
+          <div
+            className={styles.modalContent}
+            onClick={(e) => e.stopPropagation()}
+          >
+            <h2>Редактировать категорию</h2>
+            <input
+              type="text"
+              placeholder="Название категории *"
+              value={editingCategory.name}
+              onChange={(e) =>
+                setEditingCategory({ ...editingCategory, name: e.target.value })
+              }
+            />
+            <textarea
+              placeholder="Описание категории"
+              value={editingCategory.description || ""}
+              onChange={(e) =>
+                setEditingCategory({
+                  ...editingCategory,
+                  description: e.target.value,
+                })
+              }
+              rows={3}
+            />
+            <div className={styles.modalButtons}>
+              <button onClick={() => setShowEditModal(false)}>Отмена</button>
+              <button className="cta-btn" onClick={editCategory}>
+                Сохранить
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Модальное окно добавления поля */}
-      {showFieldModal && (
+      {showFieldModal && selectedCategory && (
         <div className={styles.modal} onClick={() => setShowFieldModal(false)}>
           <div
             className={styles.modalContent}
             onClick={(e) => e.stopPropagation()}
           >
-            <h2>Добавить поле для "{selectedCategory?.name}"</h2>
+            <h2>Добавить поле для "{selectedCategory.name}"</h2>
             <input
               type="text"
-              placeholder="Название поля"
+              placeholder="Название поля *"
               value={newField.label}
               onChange={(e) =>
                 setNewField({ ...newField, label: e.target.value })
@@ -341,7 +474,7 @@ const CategoriesPage = () => {
             <select
               value={newField.type}
               onChange={(e) =>
-                setNewField({ ...newField, type: e.target.value })
+                setNewField({ ...newField, type: e.target.value, options: [] })
               }
             >
               {fieldTypes.map((type) => (
@@ -372,6 +505,16 @@ const CategoriesPage = () => {
                   }
                 />
                 Обязательное поле
+              </label>
+              <label>
+                <input
+                  type="checkbox"
+                  checked={newField.visible}
+                  onChange={(e) =>
+                    setNewField({ ...newField, visible: e.target.checked })
+                  }
+                />
+                Показывать в таблице
               </label>
             </div>
             <div className={styles.modalButtons}>
